@@ -31,7 +31,7 @@ model user {
   email               String    @db.VarChar(100) @unique
   password            String    @db.VarChar(10)
   date_birth          DateTime  @db.Date
-  registration_date   DateTime  @db.Timestamp    @default(now())
+  registration_date   DateTime  @default(now())
 }
 
 model product {
@@ -41,5 +41,5 @@ model product {
   preco               Decimal   @db.Decimal(5,2)
   stock               Int?      @db.UnsignedSmallInt          @default(0)
   assessment          Decimal   @db.Decimal(3,2)
-  registration_date   DateTime  @db.Timestamp()
+  registration_date   DateTime  @default(now())
 }

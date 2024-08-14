@@ -21,7 +21,7 @@ CREATE TABLE `user` (
     `email` VARCHAR(100) NOT NULL,
     `password` VARCHAR(10) NOT NULL,
     `date_birth` DATE NOT NULL,
-    `registration_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `registration_date` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     UNIQUE INDEX `user_user_key`(`user`),
     UNIQUE INDEX `user_email_key`(`email`),
@@ -36,7 +36,7 @@ CREATE TABLE `product` (
     `preco` DECIMAL(5, 2) NOT NULL,
     `stock` SMALLINT UNSIGNED NULL DEFAULT 0,
     `assessment` DECIMAL(3, 2) NOT NULL,
-    `registration_date` TIMESTAMP NOT NULL,
+    `registration_date` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
