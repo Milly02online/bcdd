@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  posts Post[]
+}
+
+model Post {
+  id       Int  @id @default(autoincrement())
+  author   User @relation(fields: [authorId], references: [id])
+  authorId Int
+}
+
+
+
+// model autor {
+//   id                Int                 @id @default(autoincrement()) @db.UnsignedInt
+//   nome              String              @db.VarChar(45)
+//   nacionalidade     String?             @db.VarChar(45)
+//   nascimento        DateTime?           @db.Date
+//   bio               String?             @db.Text
+//   autorescrevelivro autorescrevelivro[]
+// }
+
+// model autorescrevelivro {
+//   autorId Int   @db.UnsignedInt
+//   livroId Int   @db.UnsignedInt
+//   autor   autor @relation(fields: [autorId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Autor_has_Livro_Autor")
+//   livro   livro @relation(fields: [livroId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Autor_has_Livro_Livro1")
+
+//   @@id([autorId, livroId])
+//   @@index([autorId], map: "fk_Autor_has_Livro_Autor_idx")
+//   @@index([livroId], map: "fk_Autor_has_Livro_Livro1_idx")
+// }
+
+// model livro {
+//   id                Int                 @id @default(autoincrement()) @db.UnsignedInt
+//   titulo            String              @db.VarChar(100)
+//   isbn              String?             @db.VarChar(13)
+//   publicacao        Int?                @db.Year
+//   editora           String?             @db.VarChar(50)
+//   genero            String?             @db.VarChar(50)
+//   autorescrevelivro autorescrevelivro[]
+//   exemplar          exemplar[]
+// }
+
+// model emprestimo {
+//   id                      Int                       @id @default(autoincrement()) @db.UnsignedInt
+//   Emprestimo              DateTime                  @db.Timestamp(3)
+//   devolucao               DateTime?                 @db.Date
+//   Usuario_id              Int                       @db.UnsignedInt
+//   usuario                 usuario                   @relation(fields: [Usuario_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Emprestimo_Usuario1")
+//   emprestimo_has_exemplar emprestimo_has_exemplar[]
+
+//   @@index([Usuario_id], map: "fk_Emprestimo_Usuario1_idx")
+// }
+
+// model emprestimo_has_exemplar {
+//   Emprestimo_id Int        @db.UnsignedInt
+//   Exemplar_id   Int        @db.UnsignedInt
+//   emprestimo    emprestimo @relation(fields: [Emprestimo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Emprestimo_has_Exemplar_Emprestimo1")
+//   exemplar      exemplar   @relation(fields: [Exemplar_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Emprestimo_has_Exemplar_Exemplar1")
+
+//   @@id([Emprestimo_id, Exemplar_id])
+//   @@index([Emprestimo_id], map: "fk_Emprestimo_has_Exemplar_Emprestimo1_idx")
+//   @@index([Exemplar_id], map: "fk_Emprestimo_has_Exemplar_Exemplar1_idx")
+// }
+
+// model exemplar {
+//   id                      Int                       @id @default(autoincrement()) @db.UnsignedInt
+//   estado                  String?                   @db.VarChar(45)
+//   observacao              String?                   @db.Text
+//   Livro_id                Int                       @db.UnsignedInt
+//   emprestimo_has_exemplar emprestimo_has_exemplar[]
+//   livro                   livro                     @relation(fields: [Livro_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Exemplar_Livro1")
+
+//   @@index([Livro_id], map: "fk_Exemplar_Livro1_idx")
+// }
+
+// model usuario {
+//   id         Int          @id @default(autoincrement()) @db.UnsignedInt
+//   nome       String       @db.VarChar(45)
+//   usuario    String       @db.VarChar(45)
+//   senha      String?      @db.VarChar(80)
+//   email      String?      @db.VarChar(255)
+//   telefone   String?      @db.VarChar(20)
+//   endereco   String?      @db.VarChar(100)
+//   tipo       String?      @db.VarChar(45)
+//   cadastro   DateTime     @db.Timestamp(3)
+//   emprestimo emprestimo[]
+// }
