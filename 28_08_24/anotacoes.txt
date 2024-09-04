@@ -1,0 +1,12 @@
+npm init -y
+
+npm i @prisma/client
+npm i prisma -D
+npm i @faker-js/faker -D
+
+npx prisma init --datasource-provider mysql
+
+npx prisma db push
+npx prisma generate
+
+npx prisma db seed
