@@ -22,7 +22,7 @@ const seed = async () => {
 		const bio = faker.helpers.maybe(() => faker.lorem.text(), 0.2);
 		const createdAt = faker.date.past({ years: 1 });
 
-		return { status,userName, birthDate, city, region, phone, avatar, bio, createdAt };
+		return { status, userName, birthDate, city, region, phone, avatar, bio, createdAt };
 	});
 
 	await prisma.user.createMany({ data, skipDuplicates: true });

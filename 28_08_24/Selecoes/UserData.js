@@ -1,14 +1,17 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-async function Data() {
-  const users = await prisma.user.findMany({
-    where: {
-      userName: users.past({ month: 1 }),
-    }
-  });
+async function lastMonth() {
+  const lastMonth = new Date();
 
-  console.log(users);
+  lastMonth.setMonth(lastMonth.getMonth() - 1)
+  const registeredUsers = await prisma.user.findMany({
+    where: {
+      createdAt: { gte: lastMonth }}
+    },
+  );
+
+  console.log(registeredUsers);
 }
 
-Data();
+lastMonth();
